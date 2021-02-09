@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
     password: '',
     database: 'employee_trackerDB',
 });
-
+// Need to make changes to inquire here to..........and to the remaining code........
 connection.connect((err) => {
     if (err) throw err;
     runSearch();
