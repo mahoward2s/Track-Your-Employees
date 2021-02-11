@@ -29,3 +29,6 @@ CREATE TABLE employee (
 SELECT * FROM department;
 SELECT * FROM role;
 SELECT * FROM employee;
+
+--left join department table with role table and left join employee table
+SELECT 
