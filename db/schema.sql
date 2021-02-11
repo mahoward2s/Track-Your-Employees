@@ -31,4 +31,9 @@ SELECT * FROM role;
 SELECT * FROM employee;
 
 --left join department table with role table and left join employee table
-SELECT 
+SELECT *
+FROM department
+LEFT join role
+ON department.id = role.department_id
+LEFT join employee
+ON role.id = employee.role_id;

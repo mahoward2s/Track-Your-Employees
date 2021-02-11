@@ -89,17 +89,25 @@ const viewDepartments = () => {
     runTrackYourEmployees();
 };
 
-
-const readProducts = () => {
-    console.log('Selecting all Top Songs...\n');
-    connection.query('SELECT * FROM top_songs', (err, res) => {
+//-----------------------View Roles-------------------
+const viewRoles = () => {
+    console.log('Selecting all roles...\n');
+    connection.query('', (err, res) => {
         if (err) throw err;
-        // Log all results of the SELECT statement
         console.log(res);
-        connection.end();
-    });
+    })
+    runTrackYourEmployees();
 };
 
+//-----------------------View Employees-------------------
+const viewEmployees = () => {
+    console.log('Selecting all employees...\n');
+    connection.query('', (err, res) => {
+        if (err) throw err;
+        console.log(res);
+    })
+    runTrackYourEmployees();
+};
 
 const artistSearch = () => {
     inquirer
