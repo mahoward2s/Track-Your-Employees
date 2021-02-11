@@ -109,6 +109,48 @@ const viewEmployees = () => {
     runTrackYourEmployees();
 };
 
+//--------------Add Department-----------------------------------
+const addDepartment = () => {
+    inquirer
+        .prompt({
+            type: 'input',
+            name: 'addDepartment',
+            message: 'What DEPARTMENT would you like to add?',
+        })
+        .then((answer) => {
+            connection.query('INSERT INTO department SET ?',
+                {
+                    name: "answer.addDepartment",
+                },
+                (err, res) => {
+                    if (err) throw err;
+                    console.log(`${res.affectedRows} department added\n`);
+                }
+            );
+            runTrackYourEmployees();
+        });
+};
+
+
+/* const createProduct = () => {
+    console.log('Inserting a new product...\n');
+    const query = connection.query(
+        'INSERT INTO products SET ?',
+        {
+            flavor: 'Rocky Road',
+            price: 3.0,
+            quantity: 50,
+        },
+        (err, res) => {
+            if (err) throw err;
+            console.log(`${res.affectedRows} product inserted!\n`);
+            // Call updateProduct AFTER the INSERT completes
+            updateProduct();
+        }
+    );
+}; */
+
+
 /* const artistSearch = () => {
     inquirer
         .prompt({
