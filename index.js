@@ -109,7 +109,7 @@ const viewEmployees = () => {
     runTrackYourEmployees();
 };
 
-const artistSearch = () => {
+/* const artistSearch = () => {
     inquirer
         .prompt({
             name: 'artist',
@@ -231,7 +231,7 @@ const songAndAlbumSearch = () => {
                 runTrackYourEmployees();
             });
         });
-};
+}; */
 
 //-------------Quit------------
 const quitConnection = () => {
