@@ -28,32 +28,47 @@ const runTrackYourEmployees = () => {
             type: 'rawlist',
             message: 'What would you like to do?',
             choices: [
-                'Find songs by artist',
-                'Find all artists who appear more than once',
-                'Find data within a specific range',
-                'Search for a specific song',
-                'Find artists with a top song and top album in the same year',
+                'View Departments',
+                'View Roles',
+                'View Employees',
+                'Add Department',
+                'Add Role',
+                'Add Employee',
+                'Update Employees',
+                'Quit',
             ],
         })
         .then((answer) => {
             switch (answer.action) {
-                case 'Find songs by artist':
+                case 'View Departments':
                     artistSearch();
                     break;
 
-                case 'Find all artists who appear more than once':
+                case 'View Roles':
                     multiSearch();
                     break;
 
-                case 'Find data within a specific range':
+                case 'View Employees':
                     rangeSearch();
                     break;
 
-                case 'Search for a specific song':
+                case 'Add Department':
                     songSearch();
                     break;
 
-                case 'Find artists with a top song and top album in the same year':
+                case 'Add Role':
+                    songAndAlbumSearch();
+                    break;
+
+                case 'Add Employee':
+                    songAndAlbumSearch();
+                    break;
+
+                case 'Update Employee':
+                    songAndAlbumSearch();
+                    break;
+                    
+                case 'Quit':
                     songAndAlbumSearch();
                     break;
 
