@@ -1,0 +1,25 @@
+{
+  "name": "track-your-employees",
+  "version": "1.0.0",
+  "description": "App to track your employees and update their information",
+  "main": "index.js",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "n/a"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahoward2s/Track-Your-Employees.git"
+  },
+  "author": "mahoward2s",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mahoward2s/Track-Your-Employees/issues"
+  },
+  "homepage": "https://github.com/mahoward2s/Track-Your-Employees#readme"
+}

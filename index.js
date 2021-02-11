@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
+const consoleTable = require('console.table');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -17,10 +18,10 @@ const connection = mysql.createConnection({
 // Need to make changes to inquire here to..........and to the remaining code........
 connection.connect((err) => {
     if (err) throw err;
-    runSearch();
+    runTrackYourEmployees();
 });
 
-const runSearch = () => {
+const runTrackYourEmployees = () => {
     inquirer
         .prompt({
             name: 'action',
@@ -78,7 +79,7 @@ const artistSearch = () => {
                         `Position: ${position} || Song: ${song} || Year: ${year}`
                     );
                 });
-                runSearch();
+                runTrackYourEmployees();
             });
         });
 };
@@ -88,7 +89,7 @@ const multiSearch = () => {
         'SELECT artist FROM top5000 GROUP BY artist HAVING count(*) > 1';
     connection.query(query, (err, res) => {
         res.forEach(({ artist }) => console.log(artist));
-        runSearch();
+        runTrackYourEmployees();
     });
 };
 
@@ -127,7 +128,7 @@ const rangeSearch = () => {
                         `Position: ${position} || Song: ${song} || Artist: ${artist} || Year: ${year}`
                     );
                 });
-                runSearch();
+                runTrackYourEmployees();
             });
         });
 };
@@ -152,7 +153,7 @@ const songSearch = () => {
                     } else {
                         console.error(`No results for ${answer.song}`);
                     }
-                    runSearch();
+                    runTrackYourEmployees();
                 }
             );
         });
@@ -182,7 +183,7 @@ const songAndAlbumSearch = () => {
                     );
                 });
 
-                runSearch();
+                runTrackYourEmployees();
             });
         });
 };
