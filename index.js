@@ -41,35 +41,35 @@ const runTrackYourEmployees = () => {
         .then((answer) => {
             switch (answer.action) {
                 case 'View Departments':
-                    artistSearch();
+                    viewDepartments();
                     break;
 
                 case 'View Roles':
-                    multiSearch();
+                    viewRoles();
                     break;
 
                 case 'View Employees':
-                    rangeSearch();
+                    viewEmployees();
                     break;
 
                 case 'Add Department':
-                    songSearch();
+                    addDepartment();
                     break;
 
                 case 'Add Role':
-                    songAndAlbumSearch();
+                    addRole();
                     break;
 
                 case 'Add Employee':
-                    songAndAlbumSearch();
+                    addEmployee();
                     break;
 
                 case 'Update Employee':
-                    songAndAlbumSearch();
+                    updateEmployee();
                     break;
-                    
+
                 case 'Quit':
-                    songAndAlbumSearch();
+                    quitConnection();
                     break;
 
                 default:
@@ -78,6 +78,28 @@ const runTrackYourEmployees = () => {
             }
         });
 };
+
+//-----------------------View Departments-------------------
+const viewDepartments = () => {
+    console.log('Selecting all departments...\n');
+    connection.query('', (err, res) => {
+        if (err) throw err;
+        console.log(res);
+    })
+    runTrackYourEmployees();
+};
+
+
+const readProducts = () => {
+    console.log('Selecting all Top Songs...\n');
+    connection.query('SELECT * FROM top_songs', (err, res) => {
+        if (err) throw err;
+        // Log all results of the SELECT statement
+        console.log(res);
+        connection.end();
+    });
+};
+
 
 const artistSearch = () => {
     inquirer
@@ -201,4 +223,10 @@ const songAndAlbumSearch = () => {
                 runTrackYourEmployees();
             });
         });
+};
+
+//-------------Quit------------
+const quitConnection = () => {
+    if (err) throw err;
+    connection.end();
 };
