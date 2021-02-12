@@ -4,14 +4,9 @@ const consoleTable = require('console.table');
 
 const connection = mysql.createConnection({
     host: 'localhost',
-
-    // Your port; if not 3306
     port: 3306,
-
-    // Your username
     user: 'root',
-
-    // Be sure to update with your own MySQL password!
+    // Your MYSQL PASSWORD here
     password: '',
     database: 'employee_trackerDB',
 });
@@ -81,8 +76,7 @@ const runTrackYourEmployees = () => {
 
 //-----------------------View Departments-------------------
 const viewDepartments = () => {
-    console.log('Selecting all departments...\n');
-    connection.query('', (err, res) => {
+    connection.query('SELECT * FROM department', (err, res) => {
         if (err) throw err;
         console.log(res);
     })
@@ -91,8 +85,7 @@ const viewDepartments = () => {
 
 //-----------------------View Roles-------------------
 const viewRoles = () => {
-    console.log('Selecting all roles...\n');
-    connection.query('', (err, res) => {
+    connection.query('SELECT * FROM role', (err, res) => {
         if (err) throw err;
         console.log(res);
     })
@@ -101,8 +94,7 @@ const viewRoles = () => {
 
 //-----------------------View Employees-------------------
 const viewEmployees = () => {
-    console.log('Selecting all employees...\n');
-    connection.query('', (err, res) => {
+    connection.query('SELECT * FROM employee', (err, res) => {
         if (err) throw err;
         console.log(res);
     })
