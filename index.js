@@ -124,7 +124,33 @@ const addDepartment = () => {
 };
 
 //------------------------Add Role----------------------------------
-
+const addRole = () => {
+    connection.query('SELECT role.title AS Title, role.salary AS Salary FROM role', (err, res) => {
+        inquirer
+            .prompt([{
+                type: 'input',
+                name: 'roleTitle',
+                message: 'What is the TITLE of the role?'
+            }, {
+                type: 'input',
+                name: 'Salary',
+                message: 'What is the SALARY of the role?',
+            }
+            ]).then((res) => {
+                connection.query('INSERT INTO role SET ?',
+                    {
+                        title: res.roleTitle,
+                        salary: res.Salary,
+                    },
+                    (err, res) => {
+                        if (err) throw err;
+                        console.table(res);
+                        runTrackYourEmployees();
+                    }
+                );
+            });
+    })
+};
 //------------------------Functions for adding Employee--------------
 
 //-------------------------Add Employee------------------------------
@@ -162,4 +188,5 @@ const addEmployee = () => {
     const quitConnection = () => {
         if (err) throw err;
         connection.end();
+        console.log("You have ended your tracker.")
     };
