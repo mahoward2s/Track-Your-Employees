@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
     password: '',
     database: 'employee_trackerDB',
 });
-// Need to make changes to inquire here to..........and to the remaining code........
+//Connection
 connection.connect((err) => {
     if (err) throw err;
     runTrackYourEmployees();
@@ -78,7 +78,7 @@ const runTrackYourEmployees = () => {
 const viewDepartments = () => {
     connection.query('SELECT * FROM department', (err, res) => {
         if (err) throw err;
-        console.log(res);
+        console.table(res);
     })
     runTrackYourEmployees();
 };
@@ -87,7 +87,7 @@ const viewDepartments = () => {
 const viewRoles = () => {
     connection.query('SELECT * FROM role', (err, res) => {
         if (err) throw err;
-        console.log(res);
+        console.table(res);
     })
     runTrackYourEmployees();
 };
@@ -96,7 +96,7 @@ const viewRoles = () => {
 const viewEmployees = () => {
     connection.query('SELECT * FROM employee', (err, res) => {
         if (err) throw err;
-        console.log(res);
+        console.table(res);
     })
     runTrackYourEmployees();
 };
@@ -109,166 +109,57 @@ const addDepartment = () => {
             name: 'addDepartment',
             message: 'What DEPARTMENT would you like to add?',
         })
-        .then((answer) => {
+        .then((res) => {
             connection.query('INSERT INTO department SET ?',
                 {
-                    name: "answer.addDepartment",
+                    name: res.addDepartment
                 },
                 (err, res) => {
                     if (err) throw err;
-                    console.log(`${res.affectedRows} department added\n`);
-                }
-            );
-            runTrackYourEmployees();
-        });
-};
-
-
-/* const createProduct = () => {
-    console.log('Inserting a new product...\n');
-    const query = connection.query(
-        'INSERT INTO products SET ?',
-        {
-            flavor: 'Rocky Road',
-            price: 3.0,
-            quantity: 50,
-        },
-        (err, res) => {
-            if (err) throw err;
-            console.log(`${res.affectedRows} product inserted!\n`);
-            // Call updateProduct AFTER the INSERT completes
-            updateProduct();
-        }
-    );
-}; */
-
-
-/* const artistSearch = () => {
-    inquirer
-        .prompt({
-            name: 'artist',
-            type: 'input',
-            message: 'What artist would you like to search for?',
-        })
-        .then((answer) => {
-            const query = 'SELECT position, song, year FROM top5000 WHERE ?';
-            connection.query(query, { artist: answer.artist }, (err, res) => {
-                res.forEach(({ position, song, year }) => {
-                    console.log(
-                        `Position: ${position} || Song: ${song} || Year: ${year}`
-                    );
-                });
-                runTrackYourEmployees();
-            });
-        });
-};
-
-const multiSearch = () => {
-    const query =
-        'SELECT artist FROM top5000 GROUP BY artist HAVING count(*) > 1';
-    connection.query(query, (err, res) => {
-        res.forEach(({ artist }) => console.log(artist));
-        runTrackYourEmployees();
-    });
-};
-
-const rangeSearch = () => {
-    inquirer
-        .prompt([
-            {
-                name: 'start',
-                type: 'input',
-                message: 'Enter starting position: ',
-                validate(value) {
-                    if (isNaN(value) === false) {
-                        return true;
-                    }
-                    return false;
-                },
-            },
-            {
-                name: 'end',
-                type: 'input',
-                message: 'Enter ending position: ',
-                validate(value) {
-                    if (isNaN(value) === false) {
-                        return true;
-                    }
-                    return false;
-                },
-            },
-        ])
-        .then((answer) => {
-            const query =
-                'SELECT position,song,artist,year FROM top5000 WHERE position BETWEEN ? AND ?';
-            connection.query(query, [answer.start, answer.end], (err, res) => {
-                res.forEach(({ position, song, artist, year }) => {
-                    console.log(
-                        `Position: ${position} || Song: ${song} || Artist: ${artist} || Year: ${year}`
-                    );
-                });
-                runTrackYourEmployees();
-            });
-        });
-};
-
-const songSearch = () => {
-    inquirer
-        .prompt({
-            name: 'song',
-            type: 'input',
-            message: 'What song would you like to look for?',
-        })
-        .then((answer) => {
-            console.log(answer.song);
-            connection.query(
-                'SELECT * FROM top5000 WHERE ?',
-                { song: answer.song },
-                (err, res) => {
-                    if (res[0]) {
-                        console.log(
-                            `Position: ${res[0].position} || Song: ${res[0].song} || Artist: ${res[0].artist} || Year: ${res[0].year}`
-                        );
-                    } else {
-                        console.error(`No results for ${answer.song}`);
-                    }
+                    console.table(res);
                     runTrackYourEmployees();
                 }
             );
         });
 };
 
-const songAndAlbumSearch = () => {
+//------------------------Add Role----------------------------------
+
+//------------------------Functions for adding Employee--------------
+
+//-------------------------Add Employee------------------------------
+const addEmployee = () => {
     inquirer
-        .prompt({
-            name: 'artist',
-            type: 'input',
-            message: 'What artist would you like to search for?',
-        })
-        .then((answer) => {
-            let query =
-                'SELECT top_albums.year, top_albums.album, top_albums.position, top5000.song, top5000.artist ';
-            query +=
-                'FROM top_albums INNER JOIN top5000 ON (top_albums.artist = top5000.artist AND top_albums.year ';
-            query +=
-                '= top5000.year) WHERE (top_albums.artist = ? AND top5000.artist = ?) ORDER BY top_albums.year, top_albums.position';
+        .prompt([
+            {
+                type: 'input',
+                name: 'firstname',
+                message: 'Enter first name of employee'
+            },
+            {
+                type: 'input',
+                name: 'lastname',
+                message: 'Enter last name of employee'
+            },
+            {
+                type: 'list',
+                name: 'role',
+                message: 'What is their role?',
+                choices:
+            },
+            {
+                type: 'choice',
+                name: 'role',
+                message: 'What is their managers name?',
+                choices:
+            },
+        ]).then
 
-            connection.query(query, [answer.artist, answer.artist], (err, res) => {
-                console.log(`${res.length} matches found!`);
-                res.forEach(({ year, position, artist, song, album }, i) => {
-                    const num = i + 1;
-                    console.log(
-                        `${num} Year: ${year} Position: ${position} || Artist: ${artist} || Song: ${song} || Album: ${album}`
-                    );
-                });
 
-                runTrackYourEmployees();
-            });
-        });
-}; */
 
-//-------------Quit------------
-const quitConnection = () => {
-    if (err) throw err;
-    connection.end();
-};
+
+    //-------------Quit------------
+    const quitConnection = () => {
+        if (err) throw err;
+        connection.end();
+    };

@@ -33,16 +33,9 @@ SELECT * FROM department;
 SELECT * FROM role;
 SELECT * FROM employee;
 
---left join department table with role table and left join employee table
-/* SELECT *
-FROM department
-LEFT join role
-ON department.id = role.department_id
-LEFT join employee
-ON role.id = employee.role_id; */
+-----------------JOIN---------------------
 
-
-SELECT employee.id as ‘ID’, employee.first_name as ‘First Name’, employee.last_name as ‘Last Name’, role.title as ‘Position’, department.name as ‘Department’, role.salary as ‘Salary’, CONCAT(m.first_name, ' ’, m.last_name) as ‘Manager’ 
+SELECT employee.id as ‘ID’, employee.first_name as ‘First_Name’, employee.last_name as ‘Last_Name’, role.title as ‘Position’, department.name as ‘Department’, role.salary as ‘Salary’, CONCAT(m.first_name, "", m.last_name) as ‘Manager’ 
 FROM employee 
 LEFT JOIN employee m 
 ON m.id = employee.manager_id 
