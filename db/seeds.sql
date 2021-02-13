@@ -12,7 +12,7 @@ INSERT INTO role (title, salary, department_id) VALUE ("Sales Lead", 100000, 1);
 INSERT INTO role (title, salary, department_id) VALUE ("Salesperson", 80000, 1);
 INSERT INTO role (title, salary, department_id) VALUE ("Software Engineer", 120000, 2);
 INSERT INTO role (title, salary, department_id) VALUE ("Lawyer", 190000, 4);
-INSERT INTO role (titel, salary, department_id) VALUE ("Account Manager", 160000, 3);
+INSERT INTO role (title, salary, department_id) VALUE ("Account Manager", 160000, 3);
 
 ------------------------EMPLOYEE SEEDS -------
 INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUE ("Jessica", "Haze", 1, null);
