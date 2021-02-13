@@ -1,19 +1,29 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
+const figlet = require('figlet');
 
 const connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
     user: 'root',
     // Your MYSQL PASSWORD here
-    password: 'Taguchi99',
+    password: '',
     database: 'employee_trackerDB',
 });
+
 //Connection
 connection.connect((err) => {
     if (err) throw err;
-    runTrackYourEmployees();
+    figlet('Employee Tracker', function (err, data) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(data)
+        runTrackYourEmployees();
+    });
 });
 
 const runTrackYourEmployees = () => {
@@ -70,12 +80,8 @@ const runTrackYourEmployees = () => {
                     addEmployee();
                     break;
 
-                case 'Update Employee':
+                case 'Update Employees':
                     updateEmployee();
-                    break;
-
-                case 'Quit':
-                    quitConnection();
                     break;
             }
         });
@@ -227,19 +233,19 @@ function addEmployee() {
             message: "Whats their managers name?",
             choices: selectManager()
         }
-    ]).then(function (val) {
-        var roleId = selectRole().indexOf(val.role) + 1
-        var managerId = selectManager().indexOf(val.choice) + 1
+    ]).then(function (res) {
+        var roleId = selectRole().indexOf(res.role) + 1
+        var managerId = selectManager().indexOf(res.choice) + 1
         connection.query("INSERT INTO employee SET ?",
             {
-                first_name: val.firstName,
-                last_name: val.lastName,
+                first_name: res.firstname,
+                last_name: res.lastname,
                 manager_id: managerId,
                 role_id: roleId
 
             }, function (err) {
                 if (err) throw err
-                console.table(val)
+                console.table(res)
                 runTrackYourEmployees()
             })
 
@@ -271,31 +277,28 @@ function updateEmployee() {
                 message: "What is the Employees new title? ",
                 choices: selectRole()
             },
-        ]).then(function (val) {
-            var roleId = selectRole().indexOf(val.role) + 1
-            connection.query("UPDATE employee SET WHERE ?",
+            {
+                name: "manager",
+                type: "rawlist",
+                message: "What is the Employees manager? ",
+                choices: selectManager()
+            },
+        ]).then(function (res) {
+            var roleId = selectRole().indexOf(res.role) + 1
+            var managerId = selectManager().indexOf(res.manager) + 1
+            connection.query("UPDATE employee SET ?",
                 {
-                    last_name: val.lastName
-
-                },
-                {
-                    role_id: roleId
-
+                    last_name: res.lastName,
+                    role_id: roleId,
+                    manager_id: managerId,
                 },
                 function (err) {
                     if (err) throw err
-                    console.table(val)
-                    startPrompt()
+                    console.table(res)
+                    runTrackYourEmployees()
                 })
 
         });
     });
 
 }
-
-/*   //-------------Quit------------
-  const quitConnection = () => {
-      if (err) throw err;
-      connection.end();
-      console.log('You have ended TRACKER')
-  };*/

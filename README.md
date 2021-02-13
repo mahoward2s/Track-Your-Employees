@@ -16,10 +16,10 @@
 
 The following animation demonstrates the application functionality:
 
-![Track-Your-Employees]()
+![Track-Your-Employees](./assets/GIF_Demo.gif)
 
 - Click to download video 
-![Track-Your-Employees]()
+![Track-Your-Employees](./assets/Vide0_Demo.mp4)
 
 ## Description
 Is your team getting large?  Having trouble keeping track?  Well this application will allow you to easily keep track of your work environment and employees.  Keep track of everyone working for you.
